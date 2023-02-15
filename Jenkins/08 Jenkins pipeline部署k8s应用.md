@@ -181,7 +181,7 @@ pipeline {
         
         stage('Push docker image') {
             steps {
-                sh 'docker login ccr.ccs.tencentyun.com --username=100018328451 --password=Zt081998CJJ'
+                sh 'docker login ccr.ccs.tencentyun.com --username=****** --password=******'
                 sh 'docker push ${DOCKER_REPOSITORY_URL}/${imagename}:${tag}'
                 sh 'docker push ${DOCKER_REPOSITORY_URL}/${imagename}:latest'
             }

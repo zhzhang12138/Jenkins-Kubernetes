@@ -43,8 +43,8 @@ docker pull jenkins/jenkins
 #### **1、创建 Jenkins 挂载目录**
 
 ```bash
-mkdir -p /usr/local/jenkins
-chmod 777 /usr/local/jenkins
+mkdir -p /jenkins
+chmod 777 /jenkins
 ```
 
 **注意：** 创建挂载目录的同时要给该目录配置权限 777，如果权限不足的话，到时进行目录挂载的时候会失败导致无法启动 *Jenkins* 容器。
@@ -54,8 +54,7 @@ chmod 777 /usr/local/jenkins
 ```bash
 docker run -d \
     -p 8888:8080 \
-    -p 50000:50000 \
-    -v /usr/local/jenkins:/var/jenkins_home \
+    -v /jenkins:/var/jenkins_home \
     -v /etc/localtime:/etc/localtime \
     --restart=always \
     --name=jenkins \
@@ -95,10 +94,10 @@ webroot: EnvVars.masterEnvVars.get("JENKINS_HOME")
 
 ![image-20220901133025572](https://picture-typora-bucket.oss-cn-shanghai.aliyuncs.com/typora/image-20220901133025572.png)
 
-管理员的初始密码在 *Jenkins* 的工作目录下：`/var/jenkins_home/secrets/initialAdminPassword`，我们可以进容器内部去查看，也可以在我们挂载的目录下查看：
+管理员的初始密码在 *Jenkins* 的工作目录下：`/jenkins/secrets/initialAdminPassword`，我们可以进容器内部去查看，也可以在我们挂载的目录下查看：
 
 ```bash
-cat /usr/local/jenkins/secrets/initialAdminPassword
+cat /jenkins/secrets/initialAdminPassword
 ```
 
 在下一个插件安装页面上，我们选择安装推荐的插件即可，下面是推荐的插件安装页面：
